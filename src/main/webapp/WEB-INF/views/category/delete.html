@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Category</title>
+</head>
+<body>
+<h1>Delete Category</h1>
+<p>Are you sure you want to delete the following category?</p>
+<p><strong>Name:</strong> <span th:text="${category.name}"></span></p>
+<!-- Hiển thị các thông tin khác của category nếu cần -->
+<form th:action="@{/category/delete/{id}(id=${category.id})}" method="post">
+    <input type="submit" value="Delete">
+    <a th:href="@{/category/list}">Cancel</a>
+</form>
+</body>
+</html>

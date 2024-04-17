@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog Home</h1>
+
+<form action="/blog" method="get">
+    <label for="search">Tìm kiếm:</label>
+    <input type="text" id="search" name="search" th:value="${searchValue}">
+    <button type="submit">Tìm kiếm</button>
+</form>
+
+<a th:href="@{/create-blog}">Đăng Blog mới</a>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Created Date</th>
+        <th>Categories</th>
+        <th colspan="3">Actions</th> <!-- Đặt colspan là 3 -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.title}">Title</td>
+        <td th:text="${blog.author}">Author</td>
+        <td th:text="${blog.createdDate}">Created Date</td>
+
+        <td>
+            <span th:each="category, status : ${blog.categories}">
+                <span th:text="${category.name}"></span>
+                <span th:if="${!status.last}">, </span>
+            </span>
+        </td>
+
+        <td>
+            <!-- Nút Chi tiết -->
+            <a th:href="@{'/detail/' + ${blog.id}}">Chi Tiết</a>
+        </td>
+        <td>
+            <!-- Nút Sửa -->
+            <a th:href="@{'/edit/' + ${blog.id}}">Sửa</a>
+        </td>
+        <td>
+            <!-- Nút Xoá -->
+            <a th:href="@{'/delete/' + ${blog.id}}">Xoá</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a th:href="@{'/blog'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
+    <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+    <a th:href="@{'/blog'(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+</div>
+
+<a th:href="@{'/blog?sort=asc'}">Sắp xếp theo thời gian tăng dần</a>
+
+<h6><a href="/category/list">Quản Lý Category của Bài Blog - Dành cho Admin</a></h6>
+</body>
+</html>
+

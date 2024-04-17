@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        h1 {
+            color: #007bff;
+        }
+        .blog-detail {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .blog-detail h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .blog-detail p {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        .blog-detail p span {
+            font-weight: bold;
+        }
+        .blog-detail div {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            border: 1px solid #007bff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .back-link:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<h1>Blog Detail</h1>
+<div class="blog-detail">
+    <h2>Title: <span th:text="${blog.title}"></span></h2>
+    <p>Author: <span th:text="${blog.author}"></span></p>
+    <p>Created Date: <span th:text="${blog.createdDate}"></span></p>
+
+    <p>Categories:</p>
+    <ul>
+        <li th:each="category : ${blog.categories}" th:text="${category.name}"></li>
+    </ul>
+
+    <p>Content:</p>
+    <div th:text="${blog.content}"></div>
+</div>
+<a href="/" class="back-link">Trở lại</a>
+</body>
+</html>

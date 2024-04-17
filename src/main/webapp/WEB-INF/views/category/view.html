@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View Category</title>
+</head>
+<body>
+<h1 th:text="|Danh sách Các bài viết có Category là: ${category.name}|">View Category</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Created Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="blog : ${blogs}">
+        <td th:text="${blog.title}">Title</td>
+        <td th:text="${blog.author}">Author</td>
+        <td th:text="${blog.createdDate}">Created Date</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
